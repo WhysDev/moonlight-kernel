@@ -6,11 +6,11 @@ export LOCALVERSION=nightly
 
 export KBUILD_BUILD_USER=Frost
 
-export KBUILD_BUILD_HOST=DroneCI
+export KBUILD_BUILD_HOST=Weaboo
 
 export TOOLCHAIN=clang
 
-export DEVICES=whyred,lavender,a26x
+export DEVICES=whyred,tulip,lavender,a26x
 
 export CI_ID=-1001463706805
 
@@ -20,7 +20,9 @@ source helper
 
 gen_toolchain
 
-send_msg "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS for whyred,lavender,wayne and jasmine..."
+send_msg "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS for whyred,tulip,lavender,wayne and jasmine..."
+
+send_pesan "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS for whyred,tulip,lavender,wayne and jasmine..."
 
 START=$(date +"%s")
 
@@ -31,13 +33,15 @@ do
 	build ${i} -newcam
 done
 
-send_msg "⏳ Start building Overclock version for whyred..."
+send_msg "⏳ Start building Overclock version for whyred and tulip..."
+
+send_pesan "⏳ Start building Overclock version for whyred and tulip..."
 
 git apply oc.patch
 
 for i in ${DEVICES//,/ }
 do
-	if [ $i == "whyred" ]
+	if [ $i == "whyred" ] || [ $i == "tulip" ]
 	then
 		build ${i} -oldcam -overclock
 
@@ -49,4 +53,6 @@ END=$(date +"%s")
 
 DIFF=$(( END - START ))
 
-send_msg "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s | Last commit: $(git log --pretty=format:'%h : %s' -5)"
+send_msg "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s, get nightly build in @MoonlightCI"
+
+send_pesan "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s | Last commit: $(git log --pretty=format:'%h : %s' -5)"
