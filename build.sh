@@ -20,9 +20,9 @@ source helper
 
 gen_toolchain
 
-send_msg "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS for whyred,tulip,lavender,wayne and jasmine..."
+send_msg "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS | DEVICES: whyred,tulip,lavender,wayne and jasmine..."
 
-send_pesan "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS for whyred,tulip,lavender,wayne and jasmine..."
+send_pesan "⏳ Start building ${KERNELNAME} ${LOCALVERSION} EAS | DEVICES: whyred,tulip,lavender,wayne and jasmine..."
 
 START=$(date +"%s")
 
@@ -53,6 +53,6 @@ END=$(date +"%s")
 
 DIFF=$(( END - START ))
 
-send_msg "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s, get nightly build in @MoonlightCI"
+send_msg "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s, get nightly builds in @MoonlightCI | Last commit : $(git log --pretty=format:'%s' -5)"
 
-send_pesan "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s | Last commit: $(git log --pretty=format:'%h : %s' -5)"
+send_pesan "✅ Build completed in $((DIFF / 60))m $((DIFF % 60))s | Last commit: $(git log --pretty=format:'%s' -5)"
